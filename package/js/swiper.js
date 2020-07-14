@@ -7,7 +7,7 @@
  *
  * Released under the MIT License
  *
- * Released on: June 16, 2020
+ * Released on: July 14, 2020
  */
 
 (function (global, factory) {
@@ -6510,7 +6510,7 @@
         if (zoom.scale < params.minRatio) {
           zoom.scale = (params.minRatio + 1) - (Math.pow( ((params.minRatio - zoom.scale) + 1), 0.5 ));
         }
-        gesture.$imageEl.transform(("translate3d(0,0,0) scale(" + (zoom.scale) + ")"));
+        gesture.$imageEl.transform(("translate(0,0) scale(" + (zoom.scale) + ")"));
       },
       onGestureEnd: function onGestureEnd(e) {
         var swiper = this;
@@ -6529,7 +6529,7 @@
         }
         if (!gesture.$imageEl || gesture.$imageEl.length === 0) { return; }
         zoom.scale = Math.max(Math.min(zoom.scale, gesture.maxRatio), params.minRatio);
-        gesture.$imageEl.transition(swiper.params.speed).transform(("translate3d(0,0,0) scale(" + (zoom.scale) + ")"));
+        gesture.$imageEl.transition(swiper.params.speed).transform(("translate(0,0) scale(" + (zoom.scale) + ")"));
         zoom.currentScale = zoom.scale;
         zoom.isScaling = false;
         if (zoom.scale === 1) { gesture.$slideEl = undefined; }
@@ -6639,7 +6639,7 @@
         velocity.prevPositionY = image.touchesCurrent.y;
         velocity.prevTime = Date.now();
 
-        gesture.$imageWrapEl.transform(("translate3d(" + (image.currentX) + "px, " + (image.currentY) + "px,0)"));
+        gesture.$imageWrapEl.transform(("translate(" + (image.currentX) + "px, " + (image.currentY) + "px)"));
       },
       onTouchEnd: function onTouchEnd() {
         var swiper = this;
@@ -6680,7 +6680,7 @@
         image.currentX = Math.max(Math.min(image.currentX, image.maxX), image.minX);
         image.currentY = Math.max(Math.min(image.currentY, image.maxY), image.minY);
 
-        gesture.$imageWrapEl.transition(momentumDuration).transform(("translate3d(" + (image.currentX) + "px, " + (image.currentY) + "px,0)"));
+        gesture.$imageWrapEl.transition(momentumDuration).transform(("translate(" + (image.currentX) + "px, " + (image.currentY) + "px)"));
       },
       onTransitionEnd: function onTransitionEnd() {
         var swiper = this;
@@ -6688,10 +6688,10 @@
         var gesture = zoom.gesture;
         if (gesture.$slideEl && swiper.previousIndex !== swiper.activeIndex) {
           if (gesture.$imageEl) {
-            gesture.$imageEl.transform('translate3d(0,0,0) scale(1)');
+            gesture.$imageEl.transform('translate(0,0) scale(1)');
           }
           if (gesture.$imageWrapEl) {
-            gesture.$imageWrapEl.transform('translate3d(0,0,0)');
+            gesture.$imageWrapEl.transform('translate(0,0)');
           }
 
           zoom.scale = 1;
@@ -6803,8 +6803,8 @@
           translateX = 0;
           translateY = 0;
         }
-        gesture.$imageWrapEl.transition(300).transform(("translate3d(" + translateX + "px, " + translateY + "px,0)"));
-        gesture.$imageEl.transition(300).transform(("translate3d(0,0,0) scale(" + (zoom.scale) + ")"));
+        gesture.$imageWrapEl.transition(300).transform(("translate(" + translateX + "px, " + translateY + "px)"));
+        gesture.$imageEl.transition(300).transform(("translate(0,0) scale(" + (zoom.scale) + ")"));
       },
       out: function out() {
         var swiper = this;
@@ -6826,8 +6826,8 @@
 
         zoom.scale = 1;
         zoom.currentScale = 1;
-        gesture.$imageWrapEl.transition(300).transform('translate3d(0,0,0)');
-        gesture.$imageEl.transition(300).transform('translate3d(0,0,0) scale(1)');
+        gesture.$imageWrapEl.transition(300).transform('translate(0,0)');
+        gesture.$imageEl.transition(300).transform('translate(0,0) scale(1)');
         gesture.$slideEl.removeClass(("" + (params.zoomedSlideClass)));
         gesture.$slideEl = undefined;
       },
